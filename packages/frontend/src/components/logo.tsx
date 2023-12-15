@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Logo({ fill, className }: { fill?: string; className?: string }) {
   return (
-    <Link href="/">
+    <Link aria-label="Home" href="/">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill={fill ? fill : "#2563eb"}

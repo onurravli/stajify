@@ -11,6 +11,7 @@ export default function Header() {
       <div className="w-full h-16 flex flex-row items-center align-middle justify-center mx-auto px-4">
         <Logo className="h-8 w-auto" />
         <button
+          aria-label="Menu"
           className="h-16 w-16 fixed right-0 flex flex-row items-center align-middle justify-center"
           onClick={() => {
             setShowMenu(!showMenu);
