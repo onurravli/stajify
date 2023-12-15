@@ -1,3 +1,4 @@
+import Button from "@/components/button";
 import Hero from "@/components/hero";
 
 export default function Home() {
@@ -12,12 +13,8 @@ export default function Home() {
             stajify ile aradığın staja ulaşabilir, kariyerine yön verebilirsin.
           </span>
           <div className="w-full md:w-auto flex flex-col md:flex-row items-center align-middle justify-center gap-2 md:gap-4 mb-4">
-            <button className="w-full md:w-auto bg-blue-600 text-white rounded-md py-2 md:px-12 px-6 text-xl border border-transparent transition-all duration-200 hover:bg-blue-800">
-              keşfet
-            </button>
-            <button className="w-full md:w-auto bg-transparent text-blue-600 rounded-md py-2 md:px-12 px-6 text-xl border border-blue-600 transition-all duration-200 hover:bg-blue-600 hover:text-white">
-              daha fazlasını öğren
-            </button>
+            <Button variant="primary">keşfet</Button>
+            <Button variant="secondary">daha fazlasını öğren</Button>
           </div>
           <span>
             işveren misiniz?{" "}
