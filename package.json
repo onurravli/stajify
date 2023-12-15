@@ -1,5 +1,16 @@
 {
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "scripts": {
+    "dev:be": "cd packages/backend && npm run dev",
+    "dev:fe": "cd packages/frontend && npm run dev",
+    "dev": "concurrently npm:dev:be npm:dev:fe",
+    "build:be": "cd packages/backend && npm run build",
+    "build:fe": "cd packages/frontend && npm run build",
+    "build": "concurrently npm:build:be npm:build:fe",
+    "start:be": "cd packages/backend && npm run start",
+    "start:fe": "cd packages/frontend && npm run start",
+    "start": "concurrently npm:start:be npm:start:fe"
   }
 }
