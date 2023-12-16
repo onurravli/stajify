@@ -44,7 +44,8 @@ const createUsersTable = async () => {
         surname VARCHAR(255) NOT NULL,
         phone VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL UNIQUE,
-        password VARCHAR(255) NOT NULL
+        password VARCHAR(255) NOT NULL,
+        is_verified BOOLEAN NOT NULL
       );
     `);
   } catch (error) {
