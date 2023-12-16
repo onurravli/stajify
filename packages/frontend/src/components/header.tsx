@@ -5,15 +5,16 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Logo from "./logo";
 import Toggle from "./toggle";
+import Button from "./button";
 
 const links = [
   {
-    href: "/login",
-    label: "giriş yap",
-  },
-  {
     href: "/register",
     label: "kayıt ol",
+  },
+  {
+    href: "/login",
+    label: "giriş yap",
   },
 ];
 
@@ -33,23 +34,21 @@ export default function Header() {
   }, []);
   return (
     <header
-      className={`w-full fixed top-0 left-0 bg-white text-black transition-all duration-300 ${
-        scrolled ? "h-16 shadow-lg" : "h-20"
+      className={`w-full h-20 fixed top-0 left-0 bg-white text-black transition-all duration-300 ${
+        scrolled && "shadow-lg"
       }`}
     >
-      <div
-        className={`w-full md:max-w-7xl h-full flex flex-row items-center align-middle justify-between mx-auto  transition-all duration-200 ${
-          scrolled ? "px-4 md:px-6" : "px-6"
-        }`}
-      >
+      <div className="w-full md:max-w-7xl h-full flex flex-row items-center align-middle justify-between mx-auto  transition-all duration-200 px-6">
         <Logo className="h-8 w-auto" />
         <nav>
-          <ul className="flex items-center align-middle justify-center gap-4">
+          <ul className="flex items-center align-middle justify-center gap-2">
             {links.map((link) => {
               return (
                 <li key={link.href}>
                   <Link className="text-lg transition-all duration-200 hover:text-blue-600" href={link.href}>
-                    {link.label}
+                    <Button size="sm" variant={link.href === "/login" ? "primary" : "secondary"}>
+                      {link.label}
+                    </Button>
                   </Link>
                 </li>
               );
