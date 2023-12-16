@@ -55,9 +55,10 @@ usersRouter.post("/", async (req: Request, res: Response) => {
   try {
     const uuid = uuidv4();
     const hashedPassword = await bcrypt.hash(password, 10);
+    const is_verified = false;
     await postgres.query(
-      "INSERT INTO users (id, name, surname, phone, email, password) VALUES ($1, $2, $3, $4, $5, $6)",
-      [uuid, name, surname, phone, email, hashedPassword]
+      "INSERT INTO users (id, name, surname, phone, email, password, is_verified) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+      [uuid, name, surname, phone, email, hashedPassword, is_verified]
     );
     return res.status(201).json({
       message: "User created successfully.",
@@ -99,11 +100,34 @@ usersRouter.put("/:id", async (req: Request, res: Response) => {
   }
 });
 
+usersRouter.put("/verify/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json({
+      error: "An ID is required for this action.",
+    });
+  }
+  const user = await getUser(id);
+  if (!user) {
+    return res.status(404).json({
+      error: "User not found with this ID.",
+    });
+  }
+  try {
+    await postgres.query("UPDATE users SET is_verified=$1 WHERE id=$2", [true, id]);
+    return res.json({
+      message: "User verified successfully.",
+    });
+  } catch (err) {
+    handleErrors(err, res);
+  }
+});
+
 usersRouter.delete("/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   if (!id) {
     return res.status(400).json({
-      error: "An ID is required for this method.",
+      error: "An ID is required for this action.",
     });
   }
   const user = await getUser(id);
