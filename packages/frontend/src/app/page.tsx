@@ -25,7 +25,7 @@ export default function Home() {
           <span className="mt-4">
             İşveren misiniz?{" "}
             <Link className="text-blue-600" href="#">
-              bizimle iletişime geçin.
+              Bizimle iletişime geçin.
             </Link>
           </span>
         </div>
