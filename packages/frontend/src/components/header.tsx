@@ -35,7 +35,7 @@ export default function Header() {
   return (
     <header
       className={`w-full h-20 fixed top-0 left-0 bg-white text-black transition-all duration-300 ${
-        scrolled && "shadow-lg"
+        scrolled ? "shadow-lg" : ""
       }`}
     >
       <div className="w-full md:max-w-7xl h-full flex flex-row items-center align-middle justify-between mx-auto  transition-all duration-200 px-6">
