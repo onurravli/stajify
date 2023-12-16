@@ -9,12 +9,12 @@ import Button from "./button";
 
 const links = [
   {
-    href: "/register",
-    label: "kayıt ol",
-  },
-  {
     href: "/login",
     label: "giriş yap",
+  },
+  {
+    href: "/register",
+    label: "kayıt ol",
   },
 ];
 
@@ -46,7 +46,7 @@ export default function Header() {
               return (
                 <li key={link.href}>
                   <Link className="text-lg transition-all duration-200 hover:text-blue-600" href={link.href}>
-                    <Button size="sm" variant={link.href === "/login" ? "primary" : "secondary"}>
+                    <Button size="sm" variant={link.href === "/register" ? "primary" : "secondary"}>
                       {link.label}
                     </Button>
                   </Link>
