@@ -39,7 +39,7 @@ export default function Header() {
     >
       <div
         className={`w-full md:max-w-7xl h-full flex flex-row items-center align-middle justify-between mx-auto  transition-all duration-200 ${
-          scrolled ? "px-4" : "px-6"
+          scrolled ? "px-4 md:px-6" : "px-6"
         }`}
       >
         <Logo className="h-8 w-auto" />
