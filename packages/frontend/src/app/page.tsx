@@ -9,21 +9,21 @@ export default function Home() {
         <Hero className="max-w-[15rem] md:max-w-md w-full h-auto" />
         <div className="flex flex-col items-stat justify-center gap-2 md:gap-4">
           <span className="text-2xl md:text-6xl font-semibold text-gray-800">
-            staj bulmak hiç bu kadar kolay olmamıştı!
+            Staj bulmak hiç bu kadar kolay olmamıştı!
           </span>
           <span className="text-1xl md:text-3xl font-normal text-gray-800">
-            stajify ile aradığın staja ulaşabilir, kariyerine güzel bir başlangıç yapabilirsin.
+            Stajify ile aradığın staja ulaşabilir, kariyerine güzel bir başlangıç yapabilirsin.
           </span>
           <div className="flex flex-col md:flex-row w-full items-center justify-start gap-2 md:gap-4 mt-4">
             <Button size="lg" variant="primary">
-              keşfet
+              Keşfet
             </Button>
             <Button size="lg" variant="secondary">
-              daha fazlası
+              Daha fazlası
             </Button>
           </div>
           <span className="mt-4">
-            işveren misiniz?{" "}
+            İşveren misiniz?{" "}
             <Link className="text-blue-600" href="#">
               bizimle iletişime geçin.
             </Link>

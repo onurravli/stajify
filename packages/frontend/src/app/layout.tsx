@@ -8,8 +8,8 @@ const inter = Poppins({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 export const metadata: Metadata = {
-  title: "stajify | anasayfa",
-  description: "staj bulmak hiç bu kadar kolay olmamıştı.",
+  title: "Stajify | Anasayfa",
+  description: "Staj bulmak hiç bu kadar kolay olmamıştı.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

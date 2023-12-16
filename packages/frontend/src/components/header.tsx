@@ -10,11 +10,11 @@ import Button from "./button";
 const links = [
   {
     href: "/login",
-    label: "giriş yap",
+    label: "Giriş Yap",
   },
   {
     href: "/register",
-    label: "kayıt ol",
+    label: "Kayıt Ol",
   },
 ];
 
