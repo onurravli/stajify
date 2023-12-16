@@ -15,8 +15,12 @@ export default function Home() {
             stajify ile aradığın staja ulaşabilir, kariyerine güzel bir başlangıç yapabilirsin.
           </span>
           <div className="flex flex-col md:flex-row w-full items-center justify-start gap-4 mt-4">
-            <Button variant="primary">keşfet</Button>
-            <Button variant="secondary">daha fazlası</Button>
+            <Button size="lg" variant="primary">
+              keşfet
+            </Button>
+            <Button size="lg" variant="secondary">
+              daha fazlası
+            </Button>
           </div>
           <span className="mt-4">
             işveren misiniz?{" "}
