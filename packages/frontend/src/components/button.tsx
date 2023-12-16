@@ -13,7 +13,7 @@ export default function Button({
 }) {
   return (
     <button
-      className={`w-full md:w-auto rounded-md border transition-all duration-200 text-sm 
+      className={`w-full rounded-md border transition-all duration-200 text-sm 
       ${
         variant == "primary"
           ? "border-transparent bg-blue-600 text-white hover:bg-blue-800"
@@ -29,7 +29,7 @@ export default function Button({
         //   ? "px-10 py-3 text-xl"
         //   : ""
         size == "sm"
-          ? "h-10 text-sm px-4 py-2"
+          ? "h-10 text-base px-4 py-2"
           : size == "md"
           ? "h-12 text-lg px-6 py-3"
           : size == "lg"
