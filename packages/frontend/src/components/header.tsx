@@ -4,7 +4,6 @@ import { MenuIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Logo from "./logo";
-import Toggle from "./toggle";
 import Button from "./button";
 
 const links = [
