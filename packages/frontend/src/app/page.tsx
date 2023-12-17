@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-8 py-24 mt-0">
+    <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-8 py-24 mt-16">
       <div className="w-full md:max-w-7xl h-auto flex flex-col md:flex-row items-center align-middle justify-center md:gap-16">
         <Hero className="max-w-[15rem] md:max-w-md w-full h-auto" />
         <div className="flex flex-col items-stat justify-center gap-2 md:gap-4">
