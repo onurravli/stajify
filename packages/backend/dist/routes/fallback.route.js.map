@@ -1,0 +1,1 @@
+{"version":3,"file":"fallback.route.js","sourceRoot":"","sources":["../../src/routes/fallback.route.ts"],"names":[],"mappings":";;;;;AAAA,sDAA6D;AAE7D,MAAM,cAAc,GAAW,iBAAO,CAAC,MAAM,EAAE,CAAC;AAEhD,cAAc,CAAC,GAAG,CAAC,GAAG,EAAE,CAAC,GAAY,EAAE,GAAa,EAAE,EAAE;IACtD,GAAG,CAAC,QAAQ,CAAC,GAAG,CAAC,CAAC;AACpB,CAAC,CAAC,CAAC;AAEH,kBAAe,cAAc,CAAC"}
