@@ -5,6 +5,7 @@ import Input from "@/components/input";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -26,7 +27,9 @@ export default function Login() {
   };
   return (
     <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-8 py-24 mt-10">
-      <form
+      <motion.form
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
         className="w-full md:max-w-md flex flex-col items-center align-middle justify-center gap-4"
         onSubmit={handleLogin}
       >
@@ -59,7 +62,7 @@ export default function Login() {
         <span>
           Üye değil misin? <a href="/register">Kayıt ol!</a>
         </span>
-      </form>
+      </motion.form>
     </main>
   );
 }

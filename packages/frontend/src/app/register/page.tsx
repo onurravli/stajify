@@ -5,6 +5,7 @@ import axios, { Axios, AxiosError } from "axios";
 import Input from "@/components/input";
 import Button from "@/components/button";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -37,7 +38,9 @@ export default function Register() {
   };
   return (
     <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-8 py-24 mt-10">
-      <form
+      <motion.form
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
         className="w-full md:max-w-md flex flex-col items-center align-middle justify-center gap-4"
         onSubmit={handleRegister}
       >
@@ -99,7 +102,7 @@ export default function Register() {
         <span>
           Zaten üye misin? <a href="/login">Giriş Yap</a>
         </span>
-      </form>
+      </motion.form>
     </main>
   );
 }
