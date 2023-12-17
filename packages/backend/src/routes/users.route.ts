@@ -82,6 +82,7 @@ usersRouter.post("/", async (req: Request, res: Response) => {
     return res.status(409).json({
       error: "User with this email already exists.",
       errorPrintable: "Bu e-posta ile kayıtlı kullanıcı zaten var.",
+      psqlError: process.env.ENV == "dev" ? err : null,
     });
   }
 });
