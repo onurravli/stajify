@@ -4,19 +4,21 @@ export default function Button({
   size,
   onClick,
   className,
+  type,
 }: {
   children?: React.ReactNode;
   variant?: "primary" | "secondary";
   size?: "sm" | "md" | "lg" | "icon";
   onClick?: () => void;
   className?: string;
+  type?: "submit" | "reset" | "button" | undefined;
 }) {
   return (
     <button
       className={`w-full rounded-md border transition-all duration-200 text-sm 
       ${
         variant == "primary"
-          ? "border-transparent bg-blue-600 text-white hover:bg-blue-800"
+          ? "border-transparent bg-blue-600 text-white md:hover:bg-blue-800"
           : variant == "secondary"
           ? "border-blue-600 bg-transparent text-blue-600 hover:bg-blue-50"
           : ""
@@ -40,6 +42,7 @@ export default function Button({
       } ${className}
       `}
       onClick={onClick}
+      type={type}
     >
       {children}
     </button>
