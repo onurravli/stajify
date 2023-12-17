@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/header";
-import { Poppins } from "next/font/google";
+import { Montserrat } from "next/font/google";
 
-const inter = Poppins({
+const montserrat = Montserrat({
   subsets: ["latin-ext"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={montserrat.className}>
         <Header />
         {children}
       </body>
