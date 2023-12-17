@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Stajify | Kayıt Ol",
+  title: "Stajify | İletişim",
   description: "Staj bulmak hiç bu kadar kolay olmamıştı.",
 };
 

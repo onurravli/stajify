@@ -22,15 +22,19 @@ export default function Home() {
             Stajify ile aradığın staja ulaşabilir, kariyerine güzel bir başlangıç yapabilirsin.
           </span>
           <div className="flex flex-col md:flex-row w-full items-center justify-start gap-2 md:gap-4 mt-4">
-            <Button size="lg" variant="primary">
-              Keşfet
-            </Button>
-            <Button size="lg" variant="secondary">
-              Daha fazlası
-            </Button>
+            <Link className="w-full" href="/about">
+              <Button size="lg" variant="primary">
+                Keşfet
+              </Button>
+            </Link>
+            <Link className="w-full" href="/contact">
+              <Button size="lg" variant="secondary">
+                İletişim
+              </Button>
+            </Link>
           </div>
           <span className="mt-4">
-            İşveren misiniz? <Link href="#">Bizimle iletişime geçin.</Link>
+            İşveren misiniz? <Link href="/contact">Bizimle iletişime geçin.</Link>
           </span>
         </div>
       </motion.div>

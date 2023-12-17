@@ -1,48 +1,27 @@
 "use client";
 
-import React, { useState } from "react";
-import axios, { Axios, AxiosError } from "axios";
-import Input from "@/components/input";
 import Button from "@/components/button";
+import Input from "@/components/input";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Textares from "@/components/textarea";
+import Textarea from "@/components/textarea";
 
-export default function Register() {
+export default function Contact() {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
-  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const router = useRouter();
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (RegExp.prototype.test.call(/^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\.)+edu\.tr$/, email) === false) {
-      alert("Lütfen geçerli bir e-mail adresi giriniz! Yalnızca edu.tr uzantılı e-mail adresleri kabul edilmektedir.");
-      return;
-    }
-    try {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/`, {
-        name,
-        surname,
-        phone,
-        email,
-        password,
-      });
-      alert(res.data["messagePrintable"]);
-      router.push("/login");
-    } catch (err: unknown) {
-      if (err instanceof AxiosError) {
-        alert(err.response?.data["errorPrintable"]);
-      }
-    }
-  };
+  const [message, setMessage] = useState("");
+  const handleSubmit = async (e: React.FormEvent) => {};
   return (
     <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-8 py-24 mt-16">
       <motion.form
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full md:max-w-md flex flex-col items-center align-middle justify-center gap-4"
-        onSubmit={handleRegister}
+        onSubmit={handleSubmit}
       >
         <div className="w-full flex flex-row gap-4">
           <Input
@@ -76,32 +55,18 @@ export default function Register() {
           required
           autoComplete="username"
         />
-        <Input
-          placeholder="Telefon Numaran"
+        <Textarea
+          placeholder="Mesajın"
           onChange={(event) => {
-            setPhone(event.target.value);
+            setMessage(event.target.value);
           }}
-          value={phone}
-          type="tel"
+          value={message}
           required
-          autoComplete="off"
-        />
-        <Input
-          placeholder="Şifren"
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-          value={password}
-          autoComplete="new-password"
-          type="password"
-          required
+          rows={5}
         />
         <Button size="sm" variant="primary" className="w-full" type="submit">
-          <span className="text-base">Kayıt Ol</span>
+          <span className="text-base">Gönder</span>
         </Button>
-        <span>
-          Zaten üye misin? <a href="/login">Giriş Yap</a>
-        </span>
       </motion.form>
     </main>
   );
