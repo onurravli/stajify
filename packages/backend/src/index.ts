@@ -1,8 +1,12 @@
 import express from "express";
 import routes from "./routes";
 import cors from "cors";
-import { createCompaniesTable, createUsersTable } from "./services/postgres.service";
+import { createCompaniesTable, createUsersTable, tryToConnect } from "./services/postgres.service";
 import { config } from "dotenv";
+
+tryToConnect().catch((err) => {
+  return "Couldn't connect to DB.";
+});
 
 createCompaniesTable();
 createUsersTable();
@@ -19,4 +23,6 @@ app.use("/users", routes.usersRouter);
 app.use("/companies", routes.companiesRouter);
 app.use("*", routes.fallbackRouter);
 
-app.listen(port);
+app.listen(port, () => {
+  console.log(`Server running on ${port}.`);
+});
