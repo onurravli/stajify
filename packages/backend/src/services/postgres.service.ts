@@ -35,6 +35,15 @@ const postgres = new Pool({
   database: process.env.PG_DATABASE as string,
 });
 
+export const tryToConnect = async () => {
+  try {
+    const resp = await postgres.query("SELECT version()");
+    return resp;
+  } catch (err) {
+    return null;
+  }
+};
+
 const createUsersTable = async () => {
   try {
     await postgres.query(`
