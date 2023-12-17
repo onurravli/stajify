@@ -19,7 +19,7 @@ const uuid_1 = require("uuid");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const usersRouter = express_1.default.Router();
 const postgres = services_1.default.postgres;
-const getUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
+const getUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield postgres.query("SELECT * FROM users WHERE id=$1", [id]);
         return user.rows[0];
@@ -27,6 +27,18 @@ const getUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     catch (err) {
         return null;
     }
+});
+const getUserByEmail = (email) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield postgres.query("SELECT * FROM users WHERE email=$1", [email]);
+        return user.rows[0];
+    }
+    catch (err) {
+        return null;
+    }
+});
+const hashPassword = (password) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield bcrypt_1.default.hash(password, 10);
 });
 usersRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -43,7 +55,7 @@ usersRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* (
 }));
 usersRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const user = yield getUser(id);
+    const user = yield getUserById(id);
     if (!user) {
         return res.status(404).json({
             error: "User not found with this ID.",
@@ -62,24 +74,29 @@ usersRouter.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* 
     if (!name || !surname || !phone || !email || !password) {
         return res.status(400).json({
             error: "Required fields are missing.",
+            errorPrintable: "Gerekli alanlar eksik.",
         });
     }
     try {
         const uuid = (0, uuid_1.v4)();
-        const hashedPassword = yield bcrypt_1.default.hash(password, 10);
+        const hashedPassword = yield hashPassword(password);
         const is_verified = false;
         yield postgres.query("INSERT INTO users (id, name, surname, phone, email, password, is_verified) VALUES ($1, $2, $3, $4, $5, $6, $7)", [uuid, name, surname, phone, email, hashedPassword, is_verified]);
         return res.status(201).json({
             message: "User created successfully.",
+            messagePrintable: "Kullanıcı başarıyla oluşturuldu.",
         });
     }
     catch (err) {
-        (0, postgres_service_1.handleErrors)(err, res);
+        return res.status(409).json({
+            error: "User with this email already exists.",
+            errorPrintable: "Bu e-posta ile kayıtlı kullanıcı zaten var.",
+        });
     }
 }));
 usersRouter.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const user = yield getUser(id);
+    const user = yield getUserById(id);
     if (!user) {
         return res.status(404).json({
             error: "User not found with this ID.",
@@ -92,7 +109,7 @@ usersRouter.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function
         });
     }
     try {
-        const hashedPassword = yield bcrypt_1.default.hash(password, 10);
+        const hashedPassword = yield hashPassword(password);
         yield postgres.query("UPDATE users SET name=$1, surname=$2, phone=$3, email=$4, password=$5 WHERE id=$6", [
             name,
             surname,
@@ -116,7 +133,7 @@ usersRouter.put("/verify/:id", (req, res) => __awaiter(void 0, void 0, void 0, f
             error: "An ID is required for this action.",
         });
     }
-    const user = yield getUser(id);
+    const user = yield getUserById(id);
     if (!user) {
         return res.status(404).json({
             error: "User not found with this ID.",
@@ -139,7 +156,7 @@ usersRouter.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, funct
             error: "An ID is required for this action.",
         });
     }
-    const user = yield getUser(id);
+    const user = yield getUserById(id);
     if (!user) {
         return res.status(404).json({
             error: "User not found with this ID.",
@@ -154,6 +171,31 @@ usersRouter.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, funct
     catch (err) {
         (0, postgres_service_1.handleErrors)(err, res);
     }
+}));
+usersRouter.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email, password } = yield req.body;
+    if (!email || !password) {
+        return res.status(400).json({
+            error: "Required fields are missing.",
+            errorPrintable: "Gerekli alanlar eksik.",
+        });
+    }
+    const user = yield getUserByEmail(email);
+    if (!user) {
+        return res.status(404).json({
+            error: "User not found with this email.",
+            errorPrintable: "Bu e-posta ile kayıtlı kullanıcı bulunamadı.",
+        });
+    }
+    const hashedPassword = yield hashPassword(password);
+    const isPasswordCorrect = yield bcrypt_1.default.compare(password, hashedPassword);
+    if (!isPasswordCorrect) {
+        return res.status(401).json({
+            error: "Incorrect password.",
+            errorPrintable: "Hatalı şifre.",
+        });
+    }
+    return res.json({}); // TODO - Implement login
 }));
 exports.default = usersRouter;
 //# sourceMappingURL=users.route.js.map
