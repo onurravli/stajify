@@ -187,8 +187,8 @@ usersRouter.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, funct
             errorPrintable: "Bu e-posta ile kayıtlı kullanıcı bulunamadı.",
         });
     }
-    const hashedPassword = yield hashPassword(password);
-    const isPasswordCorrect = yield bcrypt_1.default.compare(password, hashedPassword);
+    const passwordInDb = user.password;
+    const isPasswordCorrect = yield bcrypt_1.default.compare(password, passwordInDb);
     if (!isPasswordCorrect) {
         return res.status(401).json({
             error: "Incorrect password.",
