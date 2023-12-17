@@ -15,6 +15,10 @@ export default function Register() {
   const router = useRouter();
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (RegExp.prototype.test.call(/^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\.)+edu\.tr$/, email) === false) {
+      alert("Lütfen geçerli bir e-mail adresi giriniz! Yalnızca edu.tr uzantılı e-mail adresleri kabul edilmektedir.");
+      return;
+    }
     try {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/`, {
         name,
@@ -46,6 +50,7 @@ export default function Register() {
             value={name}
             type="name"
             required
+            autoComplete="name"
           />
           <Input
             placeholder="Soyadın"
@@ -55,6 +60,7 @@ export default function Register() {
             value={surname}
             type="surname"
             required
+            autoComplete="surname"
           />
         </div>
         <Input
@@ -63,9 +69,9 @@ export default function Register() {
             setEmail(event.target.value);
           }}
           value={email}
-          autoComplete="email"
           type="email"
           required
+          autoComplete="email"
         />
         <Input
           placeholder="Telefon Numaran"
@@ -83,7 +89,7 @@ export default function Register() {
             setPassword(event.target.value);
           }}
           value={password}
-          autoComplete="current-password"
+          autoComplete="new-password"
           type="password"
           required
         />

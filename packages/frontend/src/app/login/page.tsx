@@ -36,9 +36,9 @@ export default function Login() {
             setEmail(event.target.value);
           }}
           value={email}
-          autoComplete="email"
           type="email"
           required
+          autoComplete="email"
         />
         <Input
           placeholder="Şifren"
@@ -46,9 +46,9 @@ export default function Login() {
             setPassword(event.target.value);
           }}
           value={password}
-          autoComplete="current-password"
           type="password"
           required
+          autoComplete="current-password"
         />
         <span className="w-full text-right">
           <a href="#reset-password">Şifremi unuttum!</a>
