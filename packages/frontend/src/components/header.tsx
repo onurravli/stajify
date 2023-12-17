@@ -40,15 +40,11 @@ export default function Header() {
       <div className="w-full md:max-w-7xl h-full flex flex-row items-center align-middle justify-between mx-auto  transition-all duration-200 px-6">
         <Logo className="h-8 w-auto" />
         <nav>
-          <ul className="flex items-center align-middle justify-center gap-2">
+          <ul className="flex items-center align-middle justify-center gap-4">
             {links.map((link) => {
               return (
                 <li key={link.href}>
-                  <Link className="text-lg transition-all duration-200 hover:text-blue-600" href={link.href}>
-                    <Button size="sm" variant={link.href === "/register" ? "primary" : "secondary"}>
-                      {link.label}
-                    </Button>
-                  </Link>
+                  <Link href={link.href}>{link.label}</Link>
                 </li>
               );
             })}
