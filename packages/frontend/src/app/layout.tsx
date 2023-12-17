@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Header from "@/components/header";
 import { Montserrat } from "next/font/google";
@@ -63,6 +63,10 @@ export const metadata: Metadata = {
     images: ["https://stajify.com/og.png"],
   },
   category: "technology",
+};
+
+export const viewport: Viewport = {
+  themeColor: "rgb(37, 99, 235)",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
