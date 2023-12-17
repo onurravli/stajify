@@ -2,13 +2,34 @@
 
 import Button from "@/components/button";
 import Input from "@/components/input";
-import { useState } from "react";
+import axios, { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/login`, {
+        email,
+        password,
+      });
+      router.push("/");
+    } catch (err: unknown) {
+      if (err instanceof AxiosError) {
+        alert(err.response?.data["errorPrintable"]);
+      }
+    }
+  };
   return (
     <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-8 py-24 mt-10">
-      <form className="w-full md:max-w-md flex flex-col items-center align-middle justify-center gap-4">
+      <form
+        className="w-full md:max-w-md flex flex-col items-center align-middle justify-center gap-4"
+        onSubmit={handleLogin}
+      >
         <Input
           placeholder="E-Mail Adresin"
           onChange={(event) => {
@@ -16,20 +37,23 @@ export default function Login() {
           }}
           value={email}
           autoComplete="email"
+          type="email"
+          required
         />
         <Input
           placeholder="Şifren"
           onChange={(event) => {
-            setEmail(event.target.value);
+            setPassword(event.target.value);
           }}
-          value={email}
-          type="password"
+          value={password}
           autoComplete="current-password"
+          type="password"
+          required
         />
         <span className="w-full text-right">
-          <a href="#">Şifremi unuttum!</a>
+          <a href="#reset-password">Şifremi unuttum!</a>
         </span>
-        <Button size="sm" variant="primary" className="w-full">
+        <Button size="sm" variant="primary" className="w-full" type="submit">
           <span className="text-base">Giriş Yap</span>
         </Button>
         <span>
