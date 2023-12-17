@@ -38,7 +38,7 @@ export default function Login() {
           value={email}
           type="email"
           required
-          autoComplete="email"
+          autoComplete="username"
         />
         <Input
           placeholder="Şifren"

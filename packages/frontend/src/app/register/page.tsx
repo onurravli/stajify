@@ -71,7 +71,7 @@ export default function Register() {
           value={email}
           type="email"
           required
-          autoComplete="email"
+          autoComplete="username"
         />
         <Input
           placeholder="Telefon Numaran"
