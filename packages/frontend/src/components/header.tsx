@@ -32,19 +32,17 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   return (
-    <header
-      className={`w-full h-20 fixed top-0 left-0 bg-white text-black transition-all duration-300 ${
-        scrolled ? "shadow-lg" : ""
-      }`}
-    >
-      <div className="w-full md:max-w-7xl h-full flex flex-row items-center align-middle justify-between mx-auto  transition-all duration-200 px-6">
-        <Logo className="h-8 w-auto" />
+    <header className={"w-full h-16 fixed top-0 left-0 bg-blue-600 text-black transition-all duration-300"}>
+      <div className="w-full md:max-w-7xl h-full flex flex-row items-center align-middle justify-between mx-auto  transition-all duration-200 px-4">
+        <Logo className="h-8 w-auto" fill="#ffffff" />
         <nav>
           <ul className="flex items-center align-middle justify-center gap-4">
             {links.map((link) => {
               return (
                 <li key={link.href}>
-                  <Link href={link.href}>{link.label}</Link>
+                  <Link className="text-white hover:text-white" aria-label={link.label} href={link.href}>
+                    {link.label}
+                  </Link>
                 </li>
               );
             })}
