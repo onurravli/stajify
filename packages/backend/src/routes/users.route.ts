@@ -1,19 +1,32 @@
 import express, { Router, Request, Response } from "express";
 import services from "../services";
-import { handleErrors } from "../services/postgres.service";
+import { error_codes, handleErrors } from "../services/postgres.service";
 import { v4 as uuidv4 } from "uuid";
-import bcrypt from "bcrypt";
+import bcrypt, { hash } from "bcrypt";
 
 const usersRouter: Router = express.Router();
 const postgres = services.postgres;
 
-const getUser = async (id: string) => {
+const getUserById = async (id: string) => {
   try {
     const user = await postgres.query("SELECT * FROM users WHERE id=$1", [id]);
     return user.rows[0];
   } catch (err) {
     return null;
   }
+};
+
+const getUserByEmail = async (email: string) => {
+  try {
+    const user = await postgres.query("SELECT * FROM users WHERE email=$1", [email]);
+    return user.rows[0];
+  } catch (err) {
+    return null;
+  }
+};
+
+const hashPassword = async (password: string) => {
+  return await bcrypt.hash(password, 10);
 };
 
 usersRouter.get("/", async (req: Request, res: Response) => {
@@ -31,7 +44,7 @@ usersRouter.get("/", async (req: Request, res: Response) => {
 
 usersRouter.get("/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
-  const user = await getUser(id);
+  const user = await getUserById(id);
   if (!user) {
     return res.status(404).json({
       error: "User not found with this ID.",
@@ -50,11 +63,12 @@ usersRouter.post("/", async (req: Request, res: Response) => {
   if (!name || !surname || !phone || !email || !password) {
     return res.status(400).json({
       error: "Required fields are missing.",
+      errorPrintable: "Gerekli alanlar eksik.",
     });
   }
   try {
     const uuid = uuidv4();
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await hashPassword(password);
     const is_verified = false;
     await postgres.query(
       "INSERT INTO users (id, name, surname, phone, email, password, is_verified) VALUES ($1, $2, $3, $4, $5, $6, $7)",
@@ -62,15 +76,19 @@ usersRouter.post("/", async (req: Request, res: Response) => {
     );
     return res.status(201).json({
       message: "User created successfully.",
+      messagePrintable: "Kullanıcı başarıyla oluşturuldu.",
     });
   } catch (err) {
-    handleErrors(err, res);
+    return res.status(409).json({
+      error: "User with this email already exists.",
+      errorPrintable: "Bu e-posta ile kayıtlı kullanıcı zaten var.",
+    });
   }
 });
 
 usersRouter.put("/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
-  const user = await getUser(id);
+  const user = await getUserById(id);
   if (!user) {
     return res.status(404).json({
       error: "User not found with this ID.",
@@ -83,7 +101,7 @@ usersRouter.put("/:id", async (req: Request, res: Response) => {
     });
   }
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await hashPassword(password);
     await postgres.query("UPDATE users SET name=$1, surname=$2, phone=$3, email=$4, password=$5 WHERE id=$6", [
       name,
       surname,
@@ -107,7 +125,7 @@ usersRouter.put("/verify/:id", async (req: Request, res: Response) => {
       error: "An ID is required for this action.",
     });
   }
-  const user = await getUser(id);
+  const user = await getUserById(id);
   if (!user) {
     return res.status(404).json({
       error: "User not found with this ID.",
@@ -130,7 +148,7 @@ usersRouter.delete("/:id", async (req: Request, res: Response) => {
       error: "An ID is required for this action.",
     });
   }
-  const user = await getUser(id);
+  const user = await getUserById(id);
   if (!user) {
     return res.status(404).json({
       error: "User not found with this ID.",
@@ -144,6 +162,32 @@ usersRouter.delete("/:id", async (req: Request, res: Response) => {
   } catch (err) {
     handleErrors(err, res);
   }
+});
+
+usersRouter.post("/login", async (req: Request, res: Response) => {
+  const { email, password } = await req.body;
+  if (!email || !password) {
+    return res.status(400).json({
+      error: "Required fields are missing.",
+      errorPrintable: "Gerekli alanlar eksik.",
+    });
+  }
+  const user = await getUserByEmail(email);
+  if (!user) {
+    return res.status(404).json({
+      error: "User not found with this email.",
+      errorPrintable: "Bu e-posta ile kayıtlı kullanıcı bulunamadı.",
+    });
+  }
+  const hashedPassword = await hashPassword(password);
+  const isPasswordCorrect = await bcrypt.compare(password, hashedPassword);
+  if (!isPasswordCorrect) {
+    return res.status(401).json({
+      error: "Incorrect password.",
+      errorPrintable: "Hatalı şifre.",
+    });
+  }
+  return res.json({}); // TODO - Implement login
 });
 
 export default usersRouter;
