@@ -6,6 +6,7 @@ import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -54,13 +55,13 @@ export default function Login() {
           autoComplete="current-password"
         />
         <span className="w-full text-right">
-          <a href="#reset-password">Şifremi unuttum!</a>
+          <Link href="#reset-password">Şifremi unuttum!</Link>
         </span>
         <Button size="sm" variant="primary" className="w-full" type="submit">
           <span className="text-base">Giriş Yap</span>
         </Button>
         <span>
-          Üye değil misin? <a href="/register">Kayıt ol!</a>
+          Üye değil misin? <Link href="/register">Kayıt ol!</Link>
         </span>
       </motion.form>
     </main>

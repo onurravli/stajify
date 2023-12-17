@@ -6,6 +6,7 @@ import Input from "@/components/input";
 import Button from "@/components/button";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -100,7 +101,7 @@ export default function Register() {
           <span className="text-base">Kayıt Ol</span>
         </Button>
         <span>
-          Zaten üye misin? <a href="/login">Giriş Yap</a>
+          Zaten üye misin? <Link href="/login">Giriş Yap</Link>
         </span>
       </motion.form>
     </main>
