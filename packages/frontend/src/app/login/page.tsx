@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function Login() {
   const [email, setEmail] = useState("");
   return (
-    <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-8 py-24 mt-0">
+    <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-8 py-24 mt-10">
       <form className="w-full md:max-w-md flex flex-col items-center align-middle justify-center gap-4">
         <Input
           placeholder="E-Mail Adresin"
@@ -30,7 +30,7 @@ export default function Login() {
           <a href="#">Şifremi unuttum!</a>
         </span>
         <Button size="sm" variant="primary" className="w-full">
-          Giriş Yap
+          <span className="text-base">Giriş Yap</span>
         </Button>
         <span>
           Üye değil misin? <a href="/register">Kayıt ol!</a>
