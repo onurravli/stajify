@@ -33,8 +33,8 @@ export const metadata: Metadata = {
     "stajyer iş ilanları",
   ],
   openGraph: {
-    title: "Stajify",
-    description: "Staj bulmak hiç bu kadar kolay olmamıştı!",
+    title: "Stajify: Staj bulmak hiç bu kadar kolay olmamıştı!",
+    description: "Stajify, öğrencilerin staj bulmasını kolaylaştıran bir uygulamadır.",
     url: "https://stajify.com",
     siteName: "Stajify",
     images: [
@@ -58,8 +58,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Stajify",
-    description: "Staj bulmak hiç bu kadar kolay olmamıştı!",
+    title: "Stajify: Staj bulmak hiç bu kadar kolay olmamıştı!",
+    description: "Stajify, öğrencilerin staj bulmasını kolaylaştıran bir uygulamadır.",
     images: ["https://stajify.com/og.png"],
   },
   category: "technology",
