@@ -6,12 +6,14 @@ export default function Input({
   value,
   type,
   autoComplete,
+  required,
 }: {
   placeholder?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: any;
   type?: HTMLInputTypeAttribute;
   autoComplete?: string;
+  required?: boolean;
 }) {
   return (
     <input
@@ -19,6 +21,9 @@ export default function Input({
       autoComplete={autoComplete}
       placeholder={placeholder}
       type={type}
+      onChange={onChange}
+      value={value}
+      required={required}
     />
   );
 }
