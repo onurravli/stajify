@@ -15,6 +15,10 @@ const links = [
     href: "/register",
     label: "Kayıt Ol",
   },
+  {
+    href: "/blog",
+    label: "Blog",
+  },
 ];
 
 export default function Header() {
