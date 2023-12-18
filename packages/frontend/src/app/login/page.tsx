@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Container from "@/components/container";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -27,7 +28,7 @@ export default function Login() {
     }
   };
   return (
-    <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-8 py-24">
+    <Container>
       <motion.form
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
@@ -64,6 +65,6 @@ export default function Login() {
           Üye değil misin? <Link href="/register">Kayıt ol!</Link>
         </span>
       </motion.form>
-    </main>
+    </Container>
   );
 }

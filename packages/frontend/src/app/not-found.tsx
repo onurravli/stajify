@@ -1,4 +1,5 @@
 import Button from "@/components/button";
+import Container from "@/components/container";
 import { Metadata } from "next";
 import { headers } from "next/headers";
 
@@ -11,7 +12,7 @@ export default async function NotFound() {
   const domain = headerList.get("host");
   const url = headerList.get("referer");
   return (
-    <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-8 py-24">
+    <Container>
       <div className="w-full md:max-w-7xl h-auto flex flex-col items-center align-middle justify-center gap-8">
         <svg className="w-96 h-96" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
           <g>
@@ -283,6 +284,6 @@ export default async function NotFound() {
           <span className="text-base">Anasayfaya Dön</span>
         </Button>
       </div>
-    </main>
+    </Container>
   );
 }

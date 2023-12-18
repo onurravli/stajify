@@ -4,10 +4,11 @@ import Button from "@/components/button";
 import Hero from "@/components/hero";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Container from "@/components/container";
 
 export default function Home() {
   return (
-    <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-8 py-24">
+    <Container>
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
@@ -38,6 +39,6 @@ export default function Home() {
           </span>
         </div>
       </motion.div>
-    </main>
+    </Container>
   );
 }

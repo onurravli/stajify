@@ -7,6 +7,7 @@ import Button from "@/components/button";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Container from "@/components/container";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -38,7 +39,7 @@ export default function Register() {
     }
   };
   return (
-    <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-8 py-24">
+    <Container>
       <motion.form
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
@@ -104,6 +105,6 @@ export default function Register() {
           Zaten üye misin? <Link href="/login">Giriş Yap</Link>
         </span>
       </motion.form>
-    </main>
+    </Container>
   );
 }

@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Textares from "@/components/textarea";
 import Textarea from "@/components/textarea";
+import Container from "@/components/container";
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -16,7 +17,7 @@ export default function Contact() {
   const [message, setMessage] = useState("");
   const handleSubmit = async (e: React.FormEvent) => {};
   return (
-    <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-8 py-24">
+    <Container>
       <motion.form
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
@@ -68,6 +69,6 @@ export default function Contact() {
           <span className="text-base">Gönder</span>
         </Button>
       </motion.form>
-    </main>
+    </Container>
   );
 }
